@@ -3,6 +3,7 @@ import MainAppLayout from '../components/layout/MainAppLayout';
 import EmailList from '../components/InboxView/EmailList';
 import EmailPreview from '../components/InboxView/EmailPreview';
 import { type Email } from '../components/InboxView/EmailItem';
+import { ThemeProvider } from '../components/ThemeProvider';
 
 /**
  * The main index page for the Email Client application.
@@ -24,28 +25,30 @@ const IndexPage: React.FC = () => {
   };
 
   return (
-    <MainAppLayout>
-      <div className="grid h-full grid-cols-[450px_1fr]">
-        {/* 
-          The list of emails. It receives:
-          - onSelectEmail: A callback to update the page's state when an email is clicked.
-          - selectedEmail: The currently selected email to apply highlighting.
-        */}
-        <EmailList
-          onSelectEmail={handleSelectEmail}
-          selectedEmail={selectedEmail}
-        />
+    <ThemeProvider>
+      <MainAppLayout>
+        <div className="grid h-full grid-cols-[450px_1fr]">
+          {/* 
+            The list of emails. It receives:
+            - onSelectEmail: A callback to update the page's state when an email is clicked.
+            - selectedEmail: The currently selected email to apply highlighting.
+          */}
+          <EmailList
+            onSelectEmail={handleSelectEmail}
+            selectedEmail={selectedEmail}
+          />
 
-        {/* 
-          The preview pane for the selected email. It is separated by a border.
-          It receives:
-          - email: The selected email object to display, or null if no email is selected.
-        */}
-        <div className="border-l">
-          <EmailPreview email={selectedEmail} />
+          {/* 
+            The preview pane for the selected email. It is separated by a border.
+            It receives:
+            - email: The selected email object to display, or null if no email is selected.
+          */}
+          <div className="border-l">
+            <EmailPreview email={selectedEmail} />
+          </div>
         </div>
-      </div>
-    </MainAppLayout>
+      </MainAppLayout>
+    </ThemeProvider>
   );
 };
 
