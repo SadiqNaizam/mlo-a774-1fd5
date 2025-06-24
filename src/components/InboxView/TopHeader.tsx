@@ -23,11 +23,16 @@ import {
   Bookmark,
   Clock,
   Tag,
-  Printer
+  Printer,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import { useTheme } from '@/components/ThemeProvider';
 
 const TopHeader: React.FC = () => {
+  const { theme, setTheme } = useTheme();
+
   return (
     <header className="bg-background border-b sticky top-0 z-10">
       <div className="h-16 flex items-center px-4 justify-between">
@@ -48,6 +53,11 @@ const TopHeader: React.FC = () => {
           <Button variant="ghost" size="icon"><Bell className="h-5 w-5" /></Button>
           <Button variant="ghost" size="icon"><Settings className="h-5 w-5" /></Button>
           <Button variant="ghost" size="icon"><HelpCircle className="h-5 w-5" /></Button>
+          <Button variant="ghost" size="icon" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+            <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="h-8 w-8 cursor-pointer">
